@@ -6,9 +6,11 @@ import {
   addCategory, addItem,
   updateItem, deleteItem, toggleItemAvailability
 } from '../../services/menu.service'
+import { useLanguage } from '../../store/useLanguage'
 
 // ─── Modal Categorie ───────────────────────────────────────
 function CategoryModal({ onClose, onSave }) {
+  const { t } = useLanguage()
   const [name, setName]     = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -24,24 +26,24 @@ function CategoryModal({ onClose, onSave }) {
     <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-sm">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Categorie nouă</h2>
+          <h2 className="text-lg font-semibold text-gray-900">{t('newCategoryTitle')}</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-xl font-bold">✕</button>
         </div>
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nume categorie *</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('categoryNameLabel')}</label>
             <input
               value={name}
               onChange={e => setName(e.target.value)}
               className="input"
-              placeholder="ex: Aperitive, Paste, Deserturi..."
+              placeholder={t('categoryPlaceholder')}
               required
             />
           </div>
           <div className="flex gap-3 pt-2">
-            <button type="button" onClick={onClose} className="btn-secondary flex-1">Anulează</button>
+            <button type="button" onClick={onClose} className="btn-secondary flex-1">{t('cancel')}</button>
             <button type="submit" disabled={loading} className="btn-primary flex-1">
-              {loading ? 'Se salvează...' : 'Salvează'}
+              {loading ? t('saving') : t('save')}
             </button>
           </div>
         </form>
@@ -52,6 +54,7 @@ function CategoryModal({ onClose, onSave }) {
 
 // ─── Modal Produs ──────────────────────────────────────────
 function ItemModal({ categories, item, onClose, onSave }) {
+  const { t } = useLanguage()
   const [form, setForm] = useState({
     name:        item?.name        || '',
     description: item?.description || '',
@@ -78,25 +81,25 @@ function ItemModal({ categories, item, onClose, onSave }) {
     <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-lg">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">{item ? 'Editează produs' : 'Produs nou'}</h2>
+          <h2 className="text-lg font-semibold text-gray-900">{item ? t('editProductTitle') : t('newProductTitle')}</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-xl font-bold">✕</button>
         </div>
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nume produs *</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('productNameLabel')}</label>
             <input name="name" value={form.name} onChange={handleChange} className="input" required />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Descriere</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('descriptionLabel')}</label>
             <textarea name="description" value={form.description} onChange={handleChange} className="input resize-none" rows={2} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Preț (RON) *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('priceLabel')}</label>
               <input name="price" type="number" min="0" step="0.5" value={form.price} onChange={handleChange} className="input" required />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Categorie *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('categoryLabel')}</label>
               <select name="categoryId" value={form.categoryId} onChange={handleChange} className="input">
                 {categories.map(c => (
                   <option key={c.id} value={c.id}>{c.name}</option>
@@ -106,12 +109,12 @@ function ItemModal({ categories, item, onClose, onSave }) {
           </div>
           <div className="flex items-center gap-2">
             <input name="available" type="checkbox" id="available" checked={form.available} onChange={handleChange} className="h-4 w-4 text-brand-500 rounded" />
-            <label htmlFor="available" className="text-sm text-gray-700">Disponibil în meniu</label>
+            <label htmlFor="available" className="text-sm text-gray-700">{t('availableLabel')}</label>
           </div>
           <div className="flex gap-3 pt-2">
-            <button type="button" onClick={onClose} className="btn-secondary flex-1">Anulează</button>
+            <button type="button" onClick={onClose} className="btn-secondary flex-1">{t('cancel')}</button>
             <button type="submit" disabled={loading} className="btn-primary flex-1">
-              {loading ? 'Se salvează...' : 'Salvează'}
+              {loading ? t('saving') : t('save')}
             </button>
           </div>
         </form>
@@ -122,6 +125,7 @@ function ItemModal({ categories, item, onClose, onSave }) {
 
 // ─── Pagina principală ─────────────────────────────────────
 export default function MenuPage() {
+  const { t } = useLanguage()
   const [categories, setCategories]         = useState([])
   const [items, setItems]                   = useState([])
   const [loading, setLoading]               = useState(true)
@@ -162,7 +166,7 @@ export default function MenuPage() {
   }
 
   async function handleDeleteItem(id) {
-    if (window.confirm('Ștergi acest produs?')) {
+    if (window.confirm(t('deleteConfirm'))) {
       await deleteItem(id)
     }
   }
@@ -179,13 +183,13 @@ export default function MenuPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Meniu</h1>
-          <p className="text-sm text-gray-500 mt-1">{items.length} produse în {categories.length} categorii</p>
+          <h1 className="text-2xl font-bold text-gray-900">{t('menuTitle')}</h1>
+          <p className="text-sm text-gray-500 mt-1">{items.length} {t('menuSubtitle')} {categories.length} {t('menuCategories')}</p>
         </div>
         <div className="flex gap-2">
           <button onClick={() => setShowCatModal(true)} className="btn-secondary flex items-center gap-2">
             <PlusIcon className="h-4 w-4" />
-            Categorie
+            {t('newCategory')}
           </button>
           <button
             onClick={() => { setEditingItem(null); setShowItemModal(true) }}
@@ -193,17 +197,17 @@ export default function MenuPage() {
             className="btn-primary flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <PlusIcon className="h-4 w-4" />
-            Produs
+            {t('newProduct')}
           </button>
         </div>
       </div>
 
       {categories.length === 0 ? (
         <div className="card text-center py-16">
-          <p className="text-gray-500">Nicio categorie încă.</p>
-          <p className="text-sm text-gray-400 mt-1">Adaugă o categorie pentru a începe să construiești meniul.</p>
+          <p className="text-gray-500">{t('noCategoriesYet')}</p>
+          <p className="text-sm text-gray-400 mt-1">{t('noCategoriesHint')}</p>
           <button onClick={() => setShowCatModal(true)} className="btn-primary mt-4 inline-flex items-center gap-2">
-            <PlusIcon className="h-4 w-4" /> Adaugă categorie
+            <PlusIcon className="h-4 w-4" /> {t('addCategory')}
           </button>
         </div>
       ) : (
@@ -233,12 +237,12 @@ export default function MenuPage() {
   <div className="flex-1 min-w-0">
     {filteredItems.length === 0 ? (
       <div className="card text-center py-12">
-        <p className="text-gray-500">Niciun produs în această categorie.</p>
+        <p className="text-gray-500">{t('noProductsYet')}</p>
         <button
           onClick={() => { setEditingItem(null); setShowItemModal(true) }}
           className="btn-primary mt-4 inline-flex items-center gap-2"
         >
-          <PlusIcon className="h-4 w-4" /> Adaugă produs
+          <PlusIcon className="h-4 w-4" /> {t('addProduct')}
         </button>
       </div>
     ) : (

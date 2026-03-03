@@ -2,8 +2,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../services/auth.service'
+import { useLanguage } from '../../store/useLanguage'
 
 export default function LoginPage() {
+  const { t } = useLanguage()
   const [email, setEmail]       = useState('')
   const [password, setPassword] = useState('')
   const [error, setError]       = useState('')
@@ -18,7 +20,7 @@ export default function LoginPage() {
       await login(email, password)
       navigate('/dashboard')
     } catch (err) {
-      setError('Email sau parolă incorecte.')
+      setError(t('wrongCredentials'))
     } finally {
       setLoading(false)
     }
@@ -32,14 +34,14 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <span className="text-4xl">🍽</span>
           <h1 className="text-2xl font-bold text-gray-900 mt-2">RestaurantOS</h1>
-          <p className="text-sm text-gray-500 mt-1">Autentifică-te pentru a continua</p>
+          <p className="text-sm text-gray-500 mt-1">{t('loginTitle')}</p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
+              {t('email')}
             </label>
             <input
               type="email"
@@ -79,7 +81,7 @@ export default function LoginPage() {
             {loading ? (
               <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
             ) : null}
-            {loading ? 'Se autentifică...' : 'Autentifică-te'}
+            {loading ? t('loggingIn') : t('loginButton')}
           </button>
         </form>
       </div>
