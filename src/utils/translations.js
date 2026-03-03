@@ -1,0 +1,192 @@
+// src/utils/translations.js
+export const translations = {
+  ro: {
+    // Navigation
+    dashboard:    'Dashboard',
+    reservations: 'Rezervări',
+    menu:         'Meniu',
+    reports:      'Rapoarte',
+
+    // Dashboard
+    dashboardTitle:       'Dashboard',
+    reservationsToday:    'Rezervări azi',
+    pending:              'În așteptare',
+    confirmed:            'Confirmate',
+    cancelled:            'Anulate',
+    recentReservations:   'Rezervări recente',
+    noReservations:       'Nicio rezervare încă.',
+    noReservationsHint:   'Rezervările adăugate vor apărea aici.',
+    name:                 'Nume',
+    date:                 'Data',
+    time:                 'Ora',
+    persons:              'Persoane',
+    status:               'Status',
+
+    // Reservations page
+    reservationsTitle:    'Rezervări',
+    reservationsTotal:    'rezervări totale',
+    newReservation:       'Rezervare nouă',
+    searchPlaceholder:    'Caută după nume, telefon sau dată...',
+    allStatuses:          'Toate statusurile',
+    noReservationsFound:  'Nicio rezervare găsită.',
+    phone:                'Telefon',
+    notes:                'Note',
+    actions:              'Acțiuni',
+    cancel:               'Anulează',
+    save:                 'Salvează',
+    saving:               'Se salvează...',
+    email:                'Email',
+    personsShort:         'Pers.',
+
+    // Reservation modal
+    newReservationTitle:  'Rezervare nouă',
+    namePlaceholder:      'Nume complet',
+
+    // Menu page
+    menuTitle:            'Meniu',
+    menuSubtitle:         'produse în',
+    menuCategories:       'categorii',
+    newCategory:          'Categorie',
+    newProduct:           'Produs',
+    noCategoriesYet:      'Nicio categorie încă.',
+    noCategoriesHint:     'Adaugă o categorie pentru a începe să construiești meniul.',
+    addCategory:          'Adaugă categorie',
+    noProductsYet:        'Niciun produs în această categorie.',
+    addProduct:           'Adaugă produs',
+    newCategoryTitle:     'Categorie nouă',
+    categoryNameLabel:    'Nume categorie *',
+    categoryPlaceholder:  'ex: Aperitive, Paste, Deserturi...',
+    newProductTitle:      'Produs nou',
+    editProductTitle:     'Editează produs',
+    productNameLabel:     'Nume produs *',
+    descriptionLabel:     'Descriere',
+    priceLabel:           'Preț (RON) *',
+    categoryLabel:        'Categorie *',
+    availableLabel:       'Disponibil în meniu',
+    deleteConfirm:        'Ștergi acest produs?',
+
+    // Reports page
+    reportsTitle:         'Rapoarte',
+    reportsSubtitle:      'Statistici și analize rezervări',
+    exportCSV:            'Export CSV',
+    totalReservations:    'Total rezervări',
+    thisMonth:            'Luna curentă',
+    totalPersons:         'Total persoane',
+    avgPersons:           'Medie persoane/rez',
+    last14Days:           'Rezervări — ultimele 14 zile',
+    statusDistribution:   'Distribuție pe status',
+    byHour:               'Rezervări pe intervalul orar',
+    noReservationsYet:    'Nicio rezervare încă',
+    noHourData:           'Nicio rezervare cu oră specificată',
+
+    // Status labels
+    statusPending:    'În așteptare',
+    statusConfirmed:  'Confirmată',
+    statusArrived:    'Sosit',
+    statusCancelled:  'Anulată',
+    statusNoShow:     'Neprezent',
+
+    // Header / Auth
+    logout:           'Logout',
+    systemOnline:     'Sistem online',
+    loginTitle:       'Autentifică-te pentru a continua',
+    loginButton:      'Autentifică-te',
+    loggingIn:        'Se autentifică...',
+    wrongCredentials: 'Email sau parolă incorecte.',
+  },
+
+  en: {
+    // Navigation
+    dashboard:    'Dashboard',
+    reservations: 'Reservations',
+    menu:         'Menu',
+    reports:      'Reports',
+
+    // Dashboard
+    dashboardTitle:       'Dashboard',
+    reservationsToday:    'Reservations today',
+    pending:              'Pending',
+    confirmed:            'Confirmed',
+    cancelled:            'Cancelled',
+    recentReservations:   'Recent reservations',
+    noReservations:       'No reservations yet.',
+    noReservationsHint:   'Added reservations will appear here.',
+    name:                 'Name',
+    date:                 'Date',
+    time:                 'Time',
+    persons:              'Persons',
+    status:               'Status',
+
+    // Reservations page
+    reservationsTitle:    'Reservations',
+    reservationsTotal:    'total reservations',
+    newReservation:       'New reservation',
+    searchPlaceholder:    'Search by name, phone or date...',
+    allStatuses:          'All statuses',
+    noReservationsFound:  'No reservations found.',
+    phone:                'Phone',
+    notes:                'Notes',
+    actions:              'Actions',
+    cancel:               'Cancel',
+    save:                 'Save',
+    saving:               'Saving...',
+    email:                'Email',
+    personsShort:         'Pers.',
+
+    // Reservation modal
+    newReservationTitle:  'New reservation',
+    namePlaceholder:      'Full name',
+
+    // Menu page
+    menuTitle:            'Menu',
+    menuSubtitle:         'products in',
+    menuCategories:       'categories',
+    newCategory:          'Category',
+    newProduct:           'Product',
+    noCategoriesYet:      'No categories yet.',
+    noCategoriesHint:     'Add a category to start building your menu.',
+    addCategory:          'Add category',
+    noProductsYet:        'No products in this category.',
+    addProduct:           'Add product',
+    newCategoryTitle:     'New category',
+    categoryNameLabel:    'Category name *',
+    categoryPlaceholder:  'e.g. Starters, Pasta, Desserts...',
+    newProductTitle:      'New product',
+    editProductTitle:     'Edit product',
+    productNameLabel:     'Product name *',
+    descriptionLabel:     'Description',
+    priceLabel:           'Price (RON) *',
+    categoryLabel:        'Category *',
+    availableLabel:       'Available in menu',
+    deleteConfirm:        'Delete this product?',
+
+    // Reports page
+    reportsTitle:         'Reports',
+    reportsSubtitle:      'Reservation statistics & analytics',
+    exportCSV:            'Export CSV',
+    totalReservations:    'Total reservations',
+    thisMonth:            'This month',
+    totalPersons:         'Total persons',
+    avgPersons:           'Avg persons/res',
+    last14Days:           'Reservations — last 14 days',
+    statusDistribution:   'Status distribution',
+    byHour:               'Reservations by time slot',
+    noReservationsYet:    'No reservations yet',
+    noHourData:           'No reservations with time specified',
+
+    // Status labels
+    statusPending:    'Pending',
+    statusConfirmed:  'Confirmed',
+    statusArrived:    'Arrived',
+    statusCancelled:  'Cancelled',
+    statusNoShow:     'No show',
+
+    // Header / Auth
+    logout:           'Logout',
+    systemOnline:     'System online',
+    loginTitle:       'Sign in to continue',
+    loginButton:      'Sign in',
+    loggingIn:        'Signing in...',
+    wrongCredentials: 'Incorrect email or password.',
+  }
+}
