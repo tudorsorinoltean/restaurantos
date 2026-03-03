@@ -15,6 +15,16 @@ export const STATUS_LABELS = {
   no_show:   'Neprezent',
 }
 
+export function getStatusLabels(t) {
+  return {
+    pending:   t('statusPending'),
+    confirmed: t('statusConfirmed'),
+    arrived:   t('statusArrived'),
+    cancelled: t('statusCancelled'),
+    no_show:   t('statusNoShow'),
+  }
+}
+
 export const STATUS_COLORS = {
   pending:   'bg-yellow-100 text-yellow-800',
   confirmed: 'bg-blue-100 text-blue-800',

@@ -1,12 +1,13 @@
 // src/pages/reports/ReportsPage.jsx
 import { useEffect, useState } from 'react'
 import { subscribeToReservations } from '../../services/reservations.service'
-import { RESERVATION_STATUS, STATUS_LABELS, STATUS_COLORS } from '../../utils/constants'
+import { RESERVATION_STATUS, STATUS_LABELS, getStatusLabels } from '../../utils/constants'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend
 } from 'recharts'
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline'
+import { useLanguage } from '../../store/useLanguage'
 
 const CHART_COLORS = ['#f97316', '#3b82f6', '#22c55e', '#ef4444', '#6b7280']
 
@@ -21,6 +22,8 @@ function StatCard({ title, value, subtitle }) {
 }
 
 export default function ReportsPage() {
+  const { t } = useLanguage()
+  const statusLabels = getStatusLabels(t)
   const [reservations, setReservations] = useState([])
   const [loading, setLoading]           = useState(true)
 
@@ -48,7 +51,7 @@ export default function ReportsPage() {
 
   // Distribuție pe status
   const byStatus = Object.entries(RESERVATION_STATUS).map(([, val], i) => ({
-    name:  STATUS_LABELS[val],
+    name:  statusLabels[val],
     value: reservations.filter(r => r.status === val).length,
     color: CHART_COLORS[i],
   })).filter(s => s.value > 0)
@@ -106,21 +109,21 @@ export default function ReportsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Rapoarte</h1>
-          <p className="text-sm text-gray-500 mt-1">Statistici și analize rezervări</p>
+          <h1 className="text-2xl font-bold text-gray-900">{t('reportsTitle')}</h1>
+          <p className="text-sm text-gray-500 mt-1">{t('reportsSubtitle')}</p>
         </div>
         <button onClick={exportCSV} className="btn-secondary flex items-center gap-2">
           <ArrowDownTrayIcon className="h-4 w-4" />
-          Export CSV
+          {t('exportCSV')}
         </button>
       </div>
 
       {/* Stat cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard title="Total rezervări"    value={reservations.length} />
-        <StatCard title="Luna curentă"       value={thisMonthCount} />
-        <StatCard title="Total persoane"     value={totalPersons} />
-        <StatCard title="Medie persoane/rez" value={avgPersons} />
+        <StatCard title={t('totalReservations')} value={reservations.length} />
+        <StatCard title={t('thisMonth')}         value={thisMonthCount} />
+        <StatCard title={t('totalPersons')}      value={totalPersons} />
+        <StatCard title={t('avgPersons')}        value={avgPersons} />
       </div>
 
       {/* Charts */}
@@ -128,7 +131,7 @@ export default function ReportsPage() {
 
         {/* Bar chart — rezervări ultimele 14 zile */}
         <div className="card">
-          <h2 className="text-base font-semibold text-gray-900 mb-4">Rezervări — ultimele 14 zile</h2>
+          <h2 className="text-base font-semibold text-gray-900 mb-4">{t('last14Days')}</h2>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={byDay} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -142,10 +145,10 @@ export default function ReportsPage() {
 
         {/* Pie chart — distribuție status */}
         <div className="card">
-          <h2 className="text-base font-semibold text-gray-900 mb-4">Distribuție pe status</h2>
+          <h2 className="text-base font-semibold text-gray-900 mb-4">{t('statusDistribution')}</h2>
           {byStatus.length === 0 ? (
             <div className="flex items-center justify-center h-52 text-gray-400 text-sm">
-              Nicio rezervare încă
+              {t('noReservationsYet')}
             </div>
           ) : (
             <ResponsiveContainer width="100%" height={220}>
@@ -170,10 +173,10 @@ export default function ReportsPage() {
 
         {/* Bar chart — rezervări pe oră */}
         <div className="card lg:col-span-2">
-          <h2 className="text-base font-semibold text-gray-900 mb-4">Rezervări pe intervalul orar</h2>
+          <h2 className="text-base font-semibold text-gray-900 mb-4">{t('byHour')}</h2>
           {byHour.length === 0 ? (
             <div className="flex items-center justify-center h-52 text-gray-400 text-sm">
-              Nicio rezervare cu oră specificată
+              {t('noHourData')}
             </div>
           ) : (
             <ResponsiveContainer width="100%" height={220}>

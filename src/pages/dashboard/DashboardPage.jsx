@@ -5,6 +5,7 @@ import {
   RESERVATION_STATUS,
   STATUS_LABELS,
   STATUS_COLORS,
+  getStatusLabels,
 } from "../../utils/constants";
 import {
   CalendarDaysIcon,
@@ -12,6 +13,7 @@ import {
   ClockIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
+import { useLanguage } from "../../store/useLanguage";
 
 function KpiCard({ title, value, icon: Icon, color, bg }) {
   return (
@@ -27,17 +29,19 @@ function KpiCard({ title, value, icon: Icon, color, bg }) {
   );
 }
 
-function StatusBadge({ status }) {
+function StatusBadge({ status, statusLabels }) {
   return (
     <span
       className={`px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap ${STATUS_COLORS[status]}`}
     >
-      {STATUS_LABELS[status]}
+      {statusLabels[status]}
     </span>
   );
 }
 
 export default function DashboardPage() {
+  const { t } = useLanguage();
+  const statusLabels = getStatusLabels(t);
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -74,7 +78,7 @@ export default function DashboardPage() {
     <div className="space-y-6">
       {/* Page title */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-gray-900">{t('dashboardTitle')}</h1>
         <p className="text-sm text-gray-500 mt-1">
           {new Date().toLocaleDateString("ro-RO", {
             weekday: "long",
@@ -88,28 +92,28 @@ export default function DashboardPage() {
       {/* KPI Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <KpiCard
-          title="Rezervări azi"
+          title={t('reservationsToday')}
           value={todayRes.length}
           icon={CalendarDaysIcon}
           color="text-brand-500"
           bg="bg-brand-50"
         />
         <KpiCard
-          title="În așteptare"
+          title={t('pending')}
           value={pending.length}
           icon={ClockIcon}
           color="text-yellow-500"
           bg="bg-yellow-50"
         />
         <KpiCard
-          title="Confirmate"
+          title={t('confirmed')}
           value={confirmed.length}
           icon={CheckCircleIcon}
           color="text-blue-500"
           bg="bg-blue-50"
         />
         <KpiCard
-          title="Anulate"
+          title={t('cancelled')}
           value={cancelled.length}
           icon={XCircleIcon}
           color="text-red-500"
@@ -120,15 +124,15 @@ export default function DashboardPage() {
       {/* Recent reservations */}
       <div className="card">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">
-          Rezervări recente
+          {t('recentReservations')}
         </h2>
 
         {reservations.length === 0 ? (
           <div className="text-center py-12">
             <CalendarDaysIcon className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-            <p className="text-gray-500">Nicio rezervare încă.</p>
+            <p className="text-gray-500">{t('noReservations')}</p>
             <p className="text-sm text-gray-400 mt-1">
-              Rezervările adăugate vor apărea aici.
+              {t('noReservationsHint')}
             </p>
           </div>
         ) : (
@@ -138,11 +142,11 @@ export default function DashboardPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-100">
-                    <th className="text-left py-3 px-2 font-medium text-gray-500">Nume</th>
-                    <th className="text-left py-3 px-2 font-medium text-gray-500">Data</th>
-                    <th className="text-left py-3 px-2 font-medium text-gray-500">Ora</th>
-                    <th className="text-left py-3 px-2 font-medium text-gray-500">Persoane</th>
-                    <th className="text-left py-3 px-2 font-medium text-gray-500">Status</th>
+                    <th className="text-left py-3 px-2 font-medium text-gray-500">{t('name')}</th>
+                    <th className="text-left py-3 px-2 font-medium text-gray-500">{t('date')}</th>
+                    <th className="text-left py-3 px-2 font-medium text-gray-500">{t('time')}</th>
+                    <th className="text-left py-3 px-2 font-medium text-gray-500">{t('persons')}</th>
+                    <th className="text-left py-3 px-2 font-medium text-gray-500">{t('status')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -152,7 +156,7 @@ export default function DashboardPage() {
                       <td className="py-3 px-2 text-gray-600">{r.date}</td>
                       <td className="py-3 px-2 text-gray-600">{r.time}</td>
                       <td className="py-3 px-2 text-gray-600">{r.persons}</td>
-                      <td className="py-3 px-2"><StatusBadge status={r.status} /></td>
+                      <td className="py-3 px-2"><StatusBadge status={r.status} statusLabels={statusLabels} /></td>
                     </tr>
                   ))}
                 </tbody>
@@ -167,7 +171,7 @@ export default function DashboardPage() {
                     <p className="font-medium text-gray-900 text-sm truncate">{r.name}</p>
                     <p className="text-xs text-gray-500 mt-0.5">{r.date} • {r.time} • {r.persons} pers.</p>
                   </div>
-                  <StatusBadge status={r.status} />
+                  <StatusBadge status={r.status} statusLabels={statusLabels} />
                 </div>
               ))}
             </div>
