@@ -1,7 +1,7 @@
 // src/pages/reports/ReportsPage.jsx
 import { useEffect, useState } from 'react'
 import { subscribeToReservations } from '../../services/reservations.service'
-import { RESERVATION_STATUS, STATUS_LABELS, getStatusLabels } from '../../utils/constants'
+import { RESERVATION_STATUS, getStatusLabels } from '../../utils/constants'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend
@@ -73,7 +73,7 @@ export default function ReportsPage() {
 
   // ── Export CSV ───────────────────────────────────────────
   function exportCSV() {
-    const headers = ['Nume', 'Telefon', 'Email', 'Data', 'Ora', 'Persoane', 'Status', 'Note']
+    const headers = [t('name'), t('phone'), t('email'), t('date'), t('time'), t('persons'), t('status'), t('notes')]
     const rows = reservations.map(r => [
       r.name || '',
       r.phone || '',
@@ -81,7 +81,7 @@ export default function ReportsPage() {
       r.date || '',
       r.time || '',
       r.persons || '',
-      STATUS_LABELS[r.status] || r.status || '',
+      statusLabels[r.status] || r.status || '',
       r.notes || '',
     ])
     const csv = [headers, ...rows]
@@ -92,7 +92,7 @@ export default function ReportsPage() {
     const url  = URL.createObjectURL(blob)
     const a    = document.createElement('a')
     a.href     = url
-    a.download = `rezervari-${new Date().toISOString().slice(0, 10)}.csv`
+    a.download = `${t('reservationsTitle').toLowerCase()}-${new Date().toISOString().slice(0, 10)}.csv`
     a.click()
     URL.revokeObjectURL(url)
   }
