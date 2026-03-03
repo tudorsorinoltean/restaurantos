@@ -271,7 +271,7 @@ export default function MenuPage() {
               </div>
             </div>
             <div className="flex items-center gap-3 flex-shrink-0">
-              <span className="font-semibold text-brand-600 text-sm">{item.price} RON</span>
+              <span className="font-semibold text-brand-600 text-sm">${item.price}</span>
               <button onClick={() => openEditItem(item)} className="text-gray-400 hover:text-brand-500 transition-colors">
                 <PencilIcon className="h-4 w-4" />
               </button>

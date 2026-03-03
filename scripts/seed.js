@@ -21,7 +21,7 @@ const db  = getFirestore(app)
 const STATUSES   = ['pending', 'confirmed', 'arrived', 'cancelled', 'no_show']
 const STATUS_W   = [15, 40, 25, 15, 5] // probabilitate per status (sumă = 100)
 const TIMES      = ['12:00','12:30','13:00','13:30','14:00','18:00','18:30','19:00','19:30','20:00','20:30','21:00']
-const NOTES      = ['Aniversare', 'Ziua de naștere', 'Masă de business', 'Cerere în căsătorie', 'Alergii: gluten', 'Loc la fereastră', 'Botez', '', '', '']
+const NOTES      = ['Anniversary', 'Birthday', 'Business dinner', 'Marriage proposal', 'Allergies: gluten', 'Window seat', 'Baptism', '', '', '']
 
 function weightedRandom(items, weights) {
   const total = weights.reduce((a, b) => a + b, 0)
@@ -41,38 +41,38 @@ function randomDate(daysBack = 60, daysForward = 30) {
 
 // ── Categorii și produse meniu ───────────────────────────
 const MENU_CATEGORIES = [
-  { name: 'Aperitive',  order: 0 },
-  { name: 'Supe',       order: 1 },
-  { name: 'Paste',      order: 2 },
-  { name: 'Grătar',     order: 3 },
-  { name: 'Deserturi',  order: 4 },
-  { name: 'Băuturi',    order: 5 },
+  { name: 'Starters',  order: 0 },
+  { name: 'Soups',     order: 1 },
+  { name: 'Pasta',     order: 2 },
+  { name: 'Grill',     order: 3 },
+  { name: 'Desserts',  order: 4 },
+  { name: 'Drinks',    order: 5 },
 ]
 
 const MENU_ITEMS = [
-  // Aperitive
-  { categoryIndex: 0, name: 'Bruschette cu roșii',     description: 'Pâine prăjită cu roșii proaspete și busuioc', price: 22, available: true },
-  { categoryIndex: 0, name: 'Carpaccio de vită',        description: 'Felii subțiri de vită cu rucola și parmezan',  price: 38, available: true },
-  { categoryIndex: 0, name: 'Plăcintă cu brânză',       description: 'Plăcintă tradițională cu brânză de oaie',     price: 18, available: true },
-  // Supe
-  { categoryIndex: 1, name: 'Ciorbă de burtă',          description: 'Rețetă tradițională cu smântână și usturoi',  price: 24, available: true },
-  { categoryIndex: 1, name: 'Supă cremă de dovleac',    description: 'Cu semințe de dovleac și ulei de trufe',      price: 22, available: true },
-  // Paste
-  { categoryIndex: 2, name: 'Spaghetti Carbonara',      description: 'Rețetă originală italiană cu guanciale',      price: 42, available: true },
-  { categoryIndex: 2, name: 'Tagliatelle cu trufe',     description: 'Paste proaspete cu cremă de trufe negre',     price: 58, available: true },
-  { categoryIndex: 2, name: 'Penne Arrabbiata',         description: 'Sos de roșii picant cu usturoi',              price: 36, available: false },
-  // Grătar
-  { categoryIndex: 3, name: 'Entrecôte 300g',           description: 'Carne de vită maturată, sos bearnez',        price: 89, available: true },
-  { categoryIndex: 3, name: 'Pui la grătar',            description: 'Piept de pui cu legume la grătar',           price: 48, available: true },
-  { categoryIndex: 3, name: 'Coaste de porc BBQ',       description: 'Marinate 24h, sos BBQ de casă',              price: 65, available: true },
-  // Deserturi
-  { categoryIndex: 4, name: 'Tiramisu',                 description: 'Rețetă clasică italiană',                    price: 24, available: true },
-  { categoryIndex: 4, name: 'Lava cake cu ciocolată',   description: 'Servit cu înghețată de vanilie',             price: 28, available: true },
-  { categoryIndex: 4, name: 'Papanași',                 description: 'Cu smântână și dulceață de vișine',          price: 22, available: true },
-  // Băuturi
-  { categoryIndex: 5, name: 'Apă minerală 0.5L',        description: '',                                           price: 8,  available: true },
-  { categoryIndex: 5, name: 'Suc natural de portocale', description: 'Stors la comandă',                          price: 18, available: true },
-  { categoryIndex: 5, name: 'Vin roșu Fetească Neagră', description: 'Cramele Recaș, 0.75L',                      price: 85, available: true },
+  // Starters
+  { categoryIndex: 0, name: 'Tomato Bruschetta',          description: 'Toasted bread with fresh tomatoes and basil',       price: 22, available: true },
+  { categoryIndex: 0, name: 'Beef Carpaccio',             description: 'Thin slices of beef with rocket and parmesan',      price: 38, available: true },
+  { categoryIndex: 0, name: 'Cheese Pie',                 description: 'Traditional pie with sheep cheese',                 price: 18, available: true },
+  // Soups
+  { categoryIndex: 1, name: 'Tripe Soup',                 description: 'Traditional recipe with sour cream and garlic',     price: 24, available: true },
+  { categoryIndex: 1, name: 'Pumpkin Cream Soup',         description: 'With pumpkin seeds and truffle oil',                price: 22, available: true },
+  // Pasta
+  { categoryIndex: 2, name: 'Spaghetti Carbonara',        description: 'Original Italian recipe with guanciale',            price: 42, available: true },
+  { categoryIndex: 2, name: 'Truffle Tagliatelle',        description: 'Fresh pasta with black truffle cream',              price: 58, available: true },
+  { categoryIndex: 2, name: 'Penne Arrabbiata',           description: 'Spicy tomato sauce with garlic',                   price: 36, available: false },
+  // Grill
+  { categoryIndex: 3, name: 'Entrecôte 300g',             description: 'Aged beef, béarnaise sauce',                       price: 89, available: true },
+  { categoryIndex: 3, name: 'Grilled Chicken',            description: 'Chicken breast with grilled vegetables',           price: 48, available: true },
+  { categoryIndex: 3, name: 'BBQ Pork Ribs',              description: 'Marinated 24h, homemade BBQ sauce',                price: 65, available: true },
+  // Desserts
+  { categoryIndex: 4, name: 'Tiramisu',                   description: 'Classic Italian recipe',                           price: 24, available: true },
+  { categoryIndex: 4, name: 'Chocolate Lava Cake',        description: 'Served with vanilla ice cream',                    price: 28, available: true },
+  { categoryIndex: 4, name: 'Romanian Donuts',            description: 'With sour cream and cherry jam',                   price: 22, available: true },
+  // Drinks
+  { categoryIndex: 5, name: 'Mineral Water 0.5L',         description: '',                                                 price: 8,  available: true },
+  { categoryIndex: 5, name: 'Fresh Orange Juice',         description: 'Freshly squeezed',                                 price: 18, available: true },
+  { categoryIndex: 5, name: 'Fetească Neagră Red Wine',   description: 'Cramele Recaș, 0.75L',                             price: 85, available: true },
 ]
 
 // ── Seed funcții ─────────────────────────────────────────
