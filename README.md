@@ -15,7 +15,7 @@ RestaurantOS is a full-stack restaurant management dashboard built with React an
 |---|---|
 | ![Login Page](screenshots/login.png) *Login Page* | ![Dashboard with KPI cards](screenshots/dashboard.png) *Dashboard with KPI cards* |
 | ![Reservations management](screenshots/reservations.png) *Reservations management* | ![Calendar view](screenshots/calendar.png) *Visual calendar* | ![Digital menu management](screenshots/menu.png) *Digital menu management* |
-| ![Reports & Analytics](screenshots/reports.png) *Reports & Analytics* | ![Mobile responsive](screenshots/dashboard-mobile.png) *Mobile responsive* |
+| ![Reports & Analytics](screenshots/reports.png) *Reports & Analytics* | ![Mobile responsive](screenshots/dashboard-mobile.png) *Mobile responsive* | ![Calendar mobile](screenshots/calendar-mobile.png) *Calendar — mobile agenda view* | |
 
 ---
 
