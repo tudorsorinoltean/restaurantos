@@ -56,18 +56,34 @@ export default function CalendarPage() {
   const [reservations, setReservations]   = useState([])
   const [loading, setLoading]             = useState(true)
   const [selectedEvent, setSelectedEvent] = useState(null)
+  const [isMobile, setIsMobile]           = useState(window.innerWidth < 640)
+  const [currentView, setCurrentView]     = useState(
+    window.innerWidth < 640 ? 'agenda' : 'month'
+  )
+  const [currentDate, setCurrentDate]     = useState(new Date())
 
   const locale    = lang === 'ro' ? ro : enUS
   const culture   = lang === 'ro' ? 'ro' : 'en-GB'
   const messages  = lang === 'ro' ? messagesRO : messagesEN
 
-  const localizer = dateFnsLocalizer({
+  const localizer = useMemo(() => dateFnsLocalizer({
     format,
     parse,
     startOfWeek: () => startOfWeek(new Date(), { locale }),
     getDay,
     locales: { 'ro': ro, 'en-GB': enUS },
-  })
+  }), [lang])
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 640
+      setIsMobile(mobile)
+      if (mobile) setCurrentView('agenda')
+      else if (currentView === 'agenda') setCurrentView('month')
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [currentView])
 
   useEffect(() => {
     const unsub = subscribeToReservations(data => {
@@ -121,17 +137,21 @@ export default function CalendarPage() {
 
       {/* Calendar */}
       <div className="card p-4">
-        <Calendar
-          localizer={localizer}
-          culture={culture}
-          messages={messages}
-          events={events}
-          defaultView="month"
-          views={['month', 'week', 'day']}
-          style={{ minHeight: 700 }}
-          eventPropGetter={eventPropGetter}
-          onSelectEvent={setSelectedEvent}
-        />
+        <div style={{ height: isMobile ? 600 : 700 }}>
+          <Calendar
+            localizer={localizer}
+            culture={culture}
+            messages={messages}
+            events={events}
+            view={currentView}
+            onView={setCurrentView}
+            date={currentDate}
+            onNavigate={setCurrentDate}
+            views={isMobile ? ['agenda', 'day'] : ['month', 'week', 'day', 'agenda']}
+            eventPropGetter={eventPropGetter}
+            onSelectEvent={setSelectedEvent}
+          />
+        </div>
       </div>
 
       {/* Event detail modal */}
