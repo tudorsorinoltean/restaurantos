@@ -45,8 +45,8 @@ export default function ReportsPage() {
   })
 
   const byDay = last14Days.map(date => ({
-    date: date.slice(5), // MM-DD
-    rezervari: reservations.filter(r => r.date === date).length,
+    date:  date.slice(5), // MM-DD
+    count: reservations.filter(r => r.date === date).length,
   }))
 
   // Distribuție pe status
@@ -60,10 +60,10 @@ export default function ReportsPage() {
   const byHour = Array.from({ length: 24 }, (_, h) => {
     const hour = String(h).padStart(2, '0')
     return {
-      ora:       `${hour}:00`,
-      rezervari: reservations.filter(r => r.time?.startsWith(hour)).length,
+      hour:  `${hour}:00`,
+      count: reservations.filter(r => r.time?.startsWith(hour)).length,
     }
-  }).filter(h => h.rezervari > 0)
+  }).filter(h => h.count > 0)
 
   // Stats generale
   const totalPersons   = reservations.reduce((sum, r) => sum + (Number(r.persons) || 0), 0)
@@ -138,7 +138,7 @@ export default function ReportsPage() {
               <XAxis dataKey="date" tick={{ fontSize: 11 }} />
               <YAxis tick={{ fontSize: 11 }} allowDecimals={false} />
               <Tooltip />
-              <Bar dataKey="rezervari" fill="#f97316" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="count" fill="#f97316" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -182,10 +182,10 @@ export default function ReportsPage() {
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={byHour} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="ora" tick={{ fontSize: 11 }} />
+                <XAxis dataKey="hour" tick={{ fontSize: 11 }} />
                 <YAxis tick={{ fontSize: 11 }} allowDecimals={false} />
                 <Tooltip />
-                <Bar dataKey="rezervari" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="count" fill="#3b82f6" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}

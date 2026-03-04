@@ -4,6 +4,7 @@ export const translations = {
     // Navigation
     dashboard:    'Dashboard',
     reservations: 'Rezervări',
+    calendar:     'Calendar',
     menu:         'Meniu',
     reports:      'Rapoarte',
 
@@ -99,6 +100,7 @@ export const translations = {
     // Navigation
     dashboard:    'Dashboard',
     reservations: 'Reservations',
+    calendar:     'Calendar',
     menu:         'Menu',
     reports:      'Reports',
 
