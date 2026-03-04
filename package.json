@@ -8,13 +8,15 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "seed": "node --experimental-vm-modules scripts/seed.js"
+    "seed": "node --experimental-vm-modules scripts/seed.js",
+    "casestudy:en": "node scripts/generate_casestudy_en.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "date-fns": "^4.1.0",
     "firebase": "^12.10.0",
     "react": "^19.2.0",
+    "react-big-calendar": "^1.19.4",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.71.2",
     "react-router-dom": "^7.13.1",
@@ -27,6 +29,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
     "autoprefixer": "^10.4.27",
+    "docx": "^9.6.0",
     "dotenv": "^17.3.1",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",

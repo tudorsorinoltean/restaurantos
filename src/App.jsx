@@ -4,6 +4,7 @@ import { useAuth } from './hooks/useAuth'
 import LoginPage from './pages/auth/LoginPage'
 import DashboardPage from './pages/dashboard/DashboardPage'
 import ReservationsPage from './pages/reservations/ReservationsPage'
+import CalendarPage from './pages/calendar/CalendarPage'
 import MenuPage from './pages/menu/MenuPage'
 import ReportsPage from './pages/reports/ReportsPage'
 import Layout from './components/layout/Layout'
@@ -31,6 +32,7 @@ export default function App() {
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard"    element={<DashboardPage />} />
           <Route path="reservations" element={<ReservationsPage />} />
+          <Route path="calendar"     element={<CalendarPage />} />
           <Route path="menu"         element={<MenuPage />} />
           <Route path="reports"      element={<ReportsPage />} />
         </Route>

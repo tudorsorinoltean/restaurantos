@@ -1,12 +1,13 @@
 // src/components/layout/Sidebar.jsx
 import { NavLink } from 'react-router-dom'
 import {
-  HomeIcon, CalendarDaysIcon,
+  HomeIcon, CalendarDaysIcon, CalendarIcon,
   Bars3BottomLeftIcon, ChartBarIcon, XMarkIcon
 } from '@heroicons/react/24/outline'
 import {
   HomeIcon as HomeIconSolid,
   CalendarDaysIcon as CalendarSolid,
+  CalendarIcon as CalendarIconSolid,
   Bars3BottomLeftIcon as MenuSolid,
   ChartBarIcon as ChartSolid,
 } from '@heroicons/react/24/solid'
@@ -18,6 +19,7 @@ export default function Sidebar({ onClose }) {
   const navItems = [
     { to: '/dashboard',    label: t('dashboard'),    icon: HomeIcon,            iconActive: HomeIconSolid },
     { to: '/reservations', label: t('reservations'), icon: CalendarDaysIcon,    iconActive: CalendarSolid },
+    { to: '/calendar',     label: t('calendar'),     icon: CalendarIcon,        iconActive: CalendarIconSolid },
     { to: '/menu',         label: t('menu'),          icon: Bars3BottomLeftIcon, iconActive: MenuSolid },
     { to: '/reports',      label: t('reports'),       icon: ChartBarIcon,        iconActive: ChartSolid },
   ]
