@@ -55,7 +55,7 @@ export default function LoginPage() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Parolă
+                {t('password')}
             </label>
             <input
               type="password"

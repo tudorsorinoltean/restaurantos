@@ -37,6 +37,7 @@ export const translations = {
     save:                 'Salvează',
     saving:               'Se salvează...',
     email:                'Email',
+    password:             'Parolă',
     personsShort:         'Pers.',
 
     // Reservation modal
@@ -133,6 +134,7 @@ export const translations = {
     save:                 'Save',
     saving:               'Saving...',
     email:                'Email',
+    password:             'Password',
     personsShort:         'Pers.',
 
     // Reservation modal

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { translations } from '../utils/translations'
 
 // Store global simplu fără Zustand — suficient pentru i18n
-let globalLang = 'ro'
+let globalLang = 'en'
 const listeners = new Set()
 
 export function setLanguage(lang) {

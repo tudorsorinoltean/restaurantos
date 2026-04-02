@@ -9,6 +9,19 @@ RestaurantOS is a full-stack restaurant management dashboard built with React an
 
 ---
 
+## 🔐 Demo Access
+
+No registration needed — use the credentials below to explore the full admin dashboard:
+
+| Field    | Value                                      |
+|----------|--------------------------------------------|
+| URL      | https://restaurantos-dev-42314.web.app     |
+| Email    | demo@restaurantos.app                      |
+| Password | Demo1234!                                  |
+| Role     | Admin — full access to all features        |
+
+---
+
 ## Screenshots
 
 | | |
