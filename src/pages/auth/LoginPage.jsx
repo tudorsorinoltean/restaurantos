@@ -84,6 +84,28 @@ export default function LoginPage() {
             {loading ? t('loggingIn') : t('loginButton')}
           </button>
         </form>
+
+        {/* Demo credentials */}
+        <div className="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-4">
+          <p className="text-xs font-semibold text-amber-800 uppercase tracking-wide mb-2">Demo Access</p>
+          <div className="space-y-1 text-sm text-amber-900">
+            <div className="flex justify-between">
+              <span className="text-amber-700">Email</span>
+              <span className="font-mono">demo@restaurantos.app</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-amber-700">Password</span>
+              <span className="font-mono">Demo1234!</span>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => { setEmail('demo@restaurantos.app'); setPassword('Demo1234!') }}
+            className="mt-3 w-full text-sm text-amber-800 font-medium border border-amber-300 rounded-md py-1.5 hover:bg-amber-100 transition-colors"
+          >
+            Use demo credentials
+          </button>
+        </div>
       </div>
     </div>
   )
